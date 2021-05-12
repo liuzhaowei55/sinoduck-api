@@ -37,7 +37,6 @@ public class FolderController {
      */
     @PostMapping()
     public ResponseDTO create(CreateFolderQuery param) {
-        this.folderService.createFolder(1L, param.getTitle());
         return ResponseDTO.success();
     }
 }

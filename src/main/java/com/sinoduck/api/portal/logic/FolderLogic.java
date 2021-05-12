@@ -21,10 +21,10 @@ public class FolderLogic {
     private FolderService folderService;
 
     public List<FolderDO> listFolders() throws ErrorResponseException {
-        Optional<UserDO> optionalUserDO = ThreadGlobalInfoContextHolder.getUser();
-        if (optionalUserDO.isEmpty()) {
+        UserDO userDO = ThreadGlobalInfoContextHolder.getUser();
+        if (null==userDO) {
             throw new ErrorResponseException(CustomErrorEnum.CURRENT_USER_NOT_FOUND);
         }
-        return folderService.listFolderRows(optionalUserDO.get());
+        return folderService.listFolderRows(userDO);
     }
 }

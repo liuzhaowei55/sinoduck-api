@@ -16,9 +16,9 @@ public class FolderService {
     @Resource
     private FolderRepository folderRepository;
 
-    public FolderDO createFolder(Long userId, String title) {
+    public FolderDO createFolder(UserDO userDO, String title) {
         FolderDO folderDO = new FolderDO();
-        folderDO.setUserId(userId);
+        folderDO.setUserId(userDO.getId());
         folderDO.setTitle(title);
         return this.folderRepository.save(folderDO);
     }
