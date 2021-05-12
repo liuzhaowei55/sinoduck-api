@@ -16,9 +16,9 @@ import java.util.Date;
 @Table(name = "folder")
 public class FolderDO {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer userId;
+    private Long userId;
     private String title;
     @Version
     private Integer version;

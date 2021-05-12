@@ -16,7 +16,7 @@ import java.util.Date;
 @Table(name = "user")
 public class UserDO {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Version
     private Integer version;

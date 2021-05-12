@@ -1,4 +1,4 @@
-package com.sinoduck.api.controller;
+package com.sinoduck.api.portal.controller;
 
 import com.sinoduck.api.pojo.dto.ResponseDTO;
 import org.springframework.web.bind.annotation.RequestMapping;
