@@ -1,9 +1,10 @@
 package com.sinoduck.api.pojo.domain;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.annotation.Version;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,8 +12,10 @@ import java.util.Date;
 /**
  * @author where.liu
  */
-@Entity
 @Data
+@Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "folder")
 public class FolderDO {
     @Id

@@ -11,10 +11,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
     @ExceptionHandler(ErrorResponseException.class)
     public ResponseDTO errorResponseExceptionHandler(ErrorResponseException exception) {
-        CustomErrorEnum error = exception.getCustomErrorEnum();
-        return ResponseDTO.builder()
-                .code(error.getCode())
-                .message(error.getMessage())
-                .build();
+        return exception.getResponseDTO();
     }
 }
