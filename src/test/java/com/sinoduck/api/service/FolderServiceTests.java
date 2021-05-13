@@ -1,5 +1,6 @@
 package com.sinoduck.api.service;
 
+import com.sinoduck.api.exception.ErrorResponseException;
 import com.sinoduck.api.pojo.domain.FolderDO;
 import com.sinoduck.api.pojo.domain.UserDO;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ public class FolderServiceTests {
     private FolderService folderService;
 
     @Test
-    public void testCreateFolder() {
+    public void testCreateFolder() throws ErrorResponseException {
         long userId = 1L;
         String title = "cc";
         UserDO userDO = new UserDO();

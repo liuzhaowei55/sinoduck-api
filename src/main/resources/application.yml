@@ -1,2 +1,5 @@
 server:
   port: 9527
+spring:
+  jackson:
+    time-zone: Asia/Shanghai

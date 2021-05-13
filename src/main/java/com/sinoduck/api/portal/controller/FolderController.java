@@ -3,10 +3,9 @@ package com.sinoduck.api.portal.controller;
 import com.sinoduck.api.exception.ErrorResponseException;
 import com.sinoduck.api.pojo.domain.FolderDO;
 import com.sinoduck.api.pojo.dto.ResponseDTO;
-import com.sinoduck.api.pojo.query.CreateFolderQuery;
+import com.sinoduck.api.portal.pojo.query.FolderCreateQuery;
 import com.sinoduck.api.portal.logic.FolderLogic;
 import com.sinoduck.api.portal.pojo.query.FolderUpdateQuery;
-import com.sinoduck.api.service.FolderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +36,7 @@ public class FolderController {
      * @param param 文件夹参数
      */
     @PostMapping(value = "add")
-    public ResponseDTO create(CreateFolderQuery param) throws ErrorResponseException {
+    public ResponseDTO create(FolderCreateQuery param) throws ErrorResponseException {
         FolderDO folderDO = folderLogic.addFolder(param.getTitle());
         return ResponseDTO.success(folderDO);
     }

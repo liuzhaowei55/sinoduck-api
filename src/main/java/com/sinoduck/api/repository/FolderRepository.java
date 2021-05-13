@@ -26,17 +26,6 @@ public interface FolderRepository extends CrudRepository<FolderDO, Long> {
     List<FolderDO> findAllByUserId(Long userId);
 
     /**
-     * 更新标题
-     *
-     * @param id    folder id
-     * @param title 标题
-     */
-    @Modifying
-    @Transactional
-    @Query("update FolderDO set title = ?2 where id = ?1")
-    void updateTitleById(Long id, String title);
-
-    /**
      * 查找用户指定文件夹
      *
      * @param id     文件夹 ID
@@ -44,4 +33,13 @@ public interface FolderRepository extends CrudRepository<FolderDO, Long> {
      * @return 文件夹
      */
     Optional<FolderDO> findFirstByIdAndUserId(Long id, Long userId);
+
+    /**
+     * 判断是否存在同名文件夹
+     *
+     * @param userId 用户 ID
+     * @param title  文件夹名称
+     * @return true 存在
+     */
+    Boolean existsByUserIdAndTitle(Long userId, String title);
 }

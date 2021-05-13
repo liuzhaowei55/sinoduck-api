@@ -22,6 +22,7 @@ CREATE TABLE `folder`
     `updated_at` TIMESTAMP    DEFAULT CURRENT_TIMESTAMP NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `created_at` TIMESTAMP    DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT '创建时间',
     PRIMARY KEY (`id`),
+    INDEX `idx_user_id_title` (`user_id`, `title`),
     INDEX `idx_deleted_at` (`deleted_at`),
     INDEX `idx_created_at` (`created_at`),
     INDEX `idx_updated_at` (`updated_at`)
