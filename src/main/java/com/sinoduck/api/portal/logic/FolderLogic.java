@@ -1,10 +1,13 @@
 package com.sinoduck.api.portal.logic;
 
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.sinoduck.api.dao.domain.FolderDo;
+import com.sinoduck.api.dao.domain.UserDo;
+import com.sinoduck.api.dao.repository.FolderRepository;
+import com.sinoduck.api.dao.service.FolderDao;
 import com.sinoduck.api.exception.CustomErrorEnum;
 import com.sinoduck.api.exception.ErrorResponseException;
-import com.sinoduck.api.pojo.domain.FolderDO;
-import com.sinoduck.api.pojo.domain.UserDO;
-import com.sinoduck.api.repository.FolderRepository;
 import com.sinoduck.api.service.FolderService;
 import com.sinoduck.api.util.ThreadGlobalInfoContextHolder;
 import org.springframework.stereotype.Service;
@@ -20,37 +23,48 @@ import java.util.Optional;
 public class FolderLogic {
     @Resource
     private FolderService folderService;
+
+    @Resource
+    private FolderDao folderDao;
+
     @Resource
     private FolderRepository folderRepository;
 
-    public List<FolderDO> listFolders() throws ErrorResponseException {
-        UserDO userDO = ThreadGlobalInfoContextHolder.getUser();
+    public List<FolderDo> listFolders() throws ErrorResponseException {
+        UserDo userDO = ThreadGlobalInfoContextHolder.getUser();
         if (null==userDO) {
             throw new ErrorResponseException(CustomErrorEnum.CURRENT_USER_NOT_FOUND);
         }
         return folderService.listFolderRows(userDO);
     }
 
-    public FolderDO addFolder(String title) throws ErrorResponseException {
-        UserDO userDO = ThreadGlobalInfoContextHolder.getUser();
+    public FolderDo addFolder(String title) throws ErrorResponseException {
+        UserDo userDO = ThreadGlobalInfoContextHolder.getUser();
         if (null==userDO) {
             throw new ErrorResponseException(CustomErrorEnum.CURRENT_USER_NOT_FOUND);
         }
         return folderService.createFolder(userDO, title);
     }
 
-    public FolderDO updateFolder(Long id, String title) throws ErrorResponseException {
-        UserDO userDO = ThreadGlobalInfoContextHolder.getUser();
+    public FolderDo updateFolder(Long id, String title) throws ErrorResponseException {
+        UserDo userDO = ThreadGlobalInfoContextHolder.getUser();
         if (null==userDO) {
             throw new ErrorResponseException(CustomErrorEnum.CURRENT_USER_NOT_FOUND);
         }
-        Optional<FolderDO> optionalFolderDO = this.folderRepository.findFirstByIdAndUserId(id, userDO.getId());
+        Optional<FolderDo> optionalFolderDO = this.folderDao.findFirstByIdAndUserId(id, userDO.getId());
         if (optionalFolderDO.isEmpty()) {
             throw new ErrorResponseException("A0000", "文件夹不存在");
         }
-        FolderDO folderDO = optionalFolderDO.get();
-        folderDO.setTitle(title);
-        folderService.update(folderDO);
+        FolderDo folderDO = optionalFolderDO.get();
+
+
+        LambdaUpdateWrapper<FolderDo> updateWrapper = Wrappers.lambdaUpdate();
+        updateWrapper.eq(FolderDo::getId, folderDO.getId());
+        updateWrapper.set(FolderDo::getTitle, title);
+        if (this.folderRepository.update(updateWrapper)) {
+            folderDO.setTitle(title);
+        }
+
         return folderDO;
     }
 }

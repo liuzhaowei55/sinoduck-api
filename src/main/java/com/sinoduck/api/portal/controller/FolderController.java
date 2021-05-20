@@ -1,7 +1,7 @@
 package com.sinoduck.api.portal.controller;
 
 import com.sinoduck.api.exception.ErrorResponseException;
-import com.sinoduck.api.pojo.domain.FolderDO;
+import com.sinoduck.api.dao.domain.FolderDo;
 import com.sinoduck.api.pojo.dto.ResponseDTO;
 import com.sinoduck.api.portal.pojo.converter.FolderDtoConverter;
 import com.sinoduck.api.portal.pojo.dto.FolderDTO;
@@ -31,8 +31,8 @@ public class FolderController {
 
     @GetMapping(value = "list")
     public ResponseDTO list() throws ErrorResponseException {
-        List<FolderDO> folderDOList = folderLogic.listFolders();
-        List<FolderDTO> folderDTOList = folderDOList.stream().map(FolderDtoConverter.INSTANCE::fromFolderDO).collect(Collectors.toList());
+        List<FolderDo> folderDoList = folderLogic.listFolders();
+        List<FolderDTO> folderDTOList = folderDoList.stream().map(FolderDtoConverter.INSTANCE::fromFolderDO).collect(Collectors.toList());
         return ResponseDTO.success(folderDTOList);
     }
 
@@ -43,13 +43,13 @@ public class FolderController {
      */
     @PostMapping(value = "add")
     public ResponseDTO create(FolderCreateQuery param) throws ErrorResponseException {
-        FolderDO folderDO = folderLogic.addFolder(param.getTitle());
+        FolderDo folderDO = folderLogic.addFolder(param.getTitle());
         return ResponseDTO.success(FolderDtoConverter.INSTANCE.fromFolderDO(folderDO));
     }
 
     @PostMapping(value = "update")
     public ResponseDTO update(FolderUpdateQuery query) throws ErrorResponseException {
-        FolderDO folderDO = this.folderLogic.updateFolder(query.getId(), query.getTitle());
+        FolderDo folderDO = this.folderLogic.updateFolder(query.getId(), query.getTitle());
         return ResponseDTO.success(FolderDtoConverter.INSTANCE.fromFolderDO(folderDO));
     }
 }

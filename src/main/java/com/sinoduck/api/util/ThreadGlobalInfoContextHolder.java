@@ -1,20 +1,18 @@
 package com.sinoduck.api.util;
 
-import com.sinoduck.api.pojo.domain.UserDO;
-
-import java.util.Optional;
+import com.sinoduck.api.dao.domain.UserDo;
 
 /**
  * @author where.liu
  */
 public class ThreadGlobalInfoContextHolder {
-    private static final ThreadLocal<UserDO> USER_DO_THREAD_LOCAL = new ThreadLocal<>();
+    private static final ThreadLocal<UserDo> USER_DO_THREAD_LOCAL = new ThreadLocal<>();
 
-    public static UserDO getUser() {
+    public static UserDo getUser() {
         return USER_DO_THREAD_LOCAL.get();
     }
 
-    public static void setUser(UserDO userDO) {
+    public static void setUser(UserDo userDO) {
         USER_DO_THREAD_LOCAL.set(userDO);
     }
 
