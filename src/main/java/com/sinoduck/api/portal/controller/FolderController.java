@@ -44,12 +44,13 @@ public class FolderController {
     @PostMapping(value = "add")
     public ResponseDTO create(FolderCreateQuery param) throws ErrorResponseException {
         Folder folder = folderLogic.addFolder(param.getTitle());
+        log.error("folder: {}", folder);
         return ResponseDTO.success(FolderDtoConverter.INSTANCE.fromFolderDO(folder));
     }
 
     @PostMapping(value = "update")
     public ResponseDTO update(FolderUpdateQuery query) throws ErrorResponseException {
         Folder folder = this.folderLogic.updateFolder(query.getId(), query.getTitle());
-        return ResponseDTO.success(FolderDtoConverter.INSTANCE.fromFolderDO(folder));
+        return ResponseDTO.success(folder);
     }
 }
