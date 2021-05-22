@@ -1,7 +1,8 @@
-package com.sinoduck.api.dao.domain;
+package com.sinoduck.api.model.entity;
 
 import cn.hutool.crypto.digest.BCrypt;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,8 +12,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @TableName(value = "user")
-public class UserDo extends BaseDomain {
+public class User extends AbstractEntity {
     private String username;
+    @JsonIgnore
     private String password;
     private String email;
     private String avatar;

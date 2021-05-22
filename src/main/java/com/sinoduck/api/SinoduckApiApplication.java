@@ -3,7 +3,6 @@ package com.sinoduck.api;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.annotation.PostConstruct;
 import java.util.TimeZone;
@@ -13,7 +12,6 @@ import java.util.TimeZone;
  */
 @SpringBootApplication
 @ServletComponentScan
-@EnableJpaAuditing
 public class SinoduckApiApplication {
 
     public static void main(String[] args) {

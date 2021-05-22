@@ -1,6 +1,7 @@
-package com.sinoduck.api.dao.domain;
+package com.sinoduck.api.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.util.Date;
@@ -9,11 +10,12 @@ import java.util.Date;
  * @author where.liu
  */
 @Data
-public abstract class BaseDomain {
-    @TableId
+public abstract class AbstractEntity {
+    @TableId(type = IdType.AUTO)
     private Long id;
     @Version
     private Integer version;
+    @JsonIgnore
     @TableLogic
     private Date deletedAt;
     @TableField(fill = FieldFill.INSERT_UPDATE)

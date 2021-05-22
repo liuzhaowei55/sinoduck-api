@@ -1,6 +1,6 @@
 package com.sinoduck.api.filter;
 
-import com.sinoduck.api.dao.domain.UserDo;
+import com.sinoduck.api.model.entity.User;
 import com.sinoduck.api.util.ThreadGlobalInfoContextHolder;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,9 +22,9 @@ public class BearerTokenAuthFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         String authorization = httpServletRequest.getHeader("Authorization");
         if (authorization.startsWith(BEARER_TOKEN_PREFIX)) {
-            UserDo userDO = new UserDo();
-            userDO.setId(1L);
-            ThreadGlobalInfoContextHolder.setUser(userDO);
+            User user = new User();
+            user.setId(1L);
+            ThreadGlobalInfoContextHolder.setUser(user);
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }

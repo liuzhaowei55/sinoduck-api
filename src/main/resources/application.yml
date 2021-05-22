@@ -3,3 +3,8 @@ server:
 spring:
   jackson:
     time-zone: Asia/Shanghai
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: deltedAt
+      logic-delete-value: now()
