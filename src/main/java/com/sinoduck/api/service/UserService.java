@@ -4,7 +4,6 @@ import cn.hutool.core.util.RandomUtil;
 import com.sinoduck.api.model.entity.Token;
 import com.sinoduck.api.model.entity.User;
 import com.sinoduck.api.model.repository.TokenRepository;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
