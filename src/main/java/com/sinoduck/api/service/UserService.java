@@ -28,7 +28,7 @@ public class UserService {
         token.setUserId(user.getId());
         token.setAccessToken(RandomUtil.randomString(16));
         token.setUa(request.getHeader("user-agent"));
-        token.setIp(StringUtils.defaultString(request.getHeader("X-Forward-For"), request.getHeader("client-ip")));
+        token.setIp(StringUtils.defaultString(request.getHeader("X-Forward-For"), request.getRemoteAddr()));
         this.tokenRepository.save(token);
         return token;
     }
