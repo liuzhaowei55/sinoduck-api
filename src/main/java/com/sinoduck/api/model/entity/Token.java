@@ -11,6 +11,8 @@ import javax.persistence.EntityListeners;
 import javax.persistence.Table;
 
 /**
+ * 登录凭证
+ *
  * @author where.liu
  */
 @EqualsAndHashCode(callSuper = true)
@@ -18,9 +20,11 @@ import javax.persistence.Table;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "folder")
+@Table(name = "token")
 @EntityListeners(AuditingEntityListener.class)
-public class Folder extends AbstractEntity {
+public class Token extends AbstractEntity {
     private Long userId;
-    private String title;
+    private String accessToken;
+    private String ua;
+    private String ip;
 }

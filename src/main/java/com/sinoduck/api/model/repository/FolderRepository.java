@@ -1,7 +1,6 @@
 package com.sinoduck.api.model.repository;
 
 import com.sinoduck.api.model.entity.Folder;
-import com.sinoduck.api.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +14,7 @@ import java.util.Optional;
 public interface FolderRepository extends JpaRepository<Folder, Long> {
     Optional<Folder> findFirstByIdAndUserId(Long id, Long userId);
 
-    Boolean existsByUserAndTitle(User user, String title);
+    Boolean existsByUserIdAndTitle(Long userId, String title);
 
     List<Folder> findAllByUserId(Long userId);
 }

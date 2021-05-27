@@ -25,10 +25,14 @@ public abstract class AbstractEntity {
     private Integer version;
     @Basic
     @JsonIgnore
+    private Date deletedAt;
+    @Basic
+    @JsonIgnore
     @LastModifiedDate
     @Column(nullable = false, updatable = false)
     private Date updatedAt;
     @Basic
+    @JsonIgnore
     @CreatedDate
     @Column(nullable = false)
     private Date createdAt;

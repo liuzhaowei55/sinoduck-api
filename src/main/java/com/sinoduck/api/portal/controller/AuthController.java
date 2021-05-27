@@ -1,10 +1,12 @@
 package com.sinoduck.api.portal.controller;
 
 import com.sinoduck.api.exception.InputException;
+import com.sinoduck.api.model.entity.Token;
 import com.sinoduck.api.model.entity.User;
 import com.sinoduck.api.pojo.dto.ResponseDTO;
 import com.sinoduck.api.portal.logic.AuthLogic;
 import com.sinoduck.api.portal.pojo.query.CreateUserQuery;
+import com.sinoduck.api.portal.pojo.query.UserLoginQuery;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,7 +40,8 @@ public class AuthController {
     }
 
     @PostMapping(value = "/login")
-    public ResponseDTO login() {
-        return ResponseDTO.success();
+    public ResponseDTO login(@Valid @RequestBody UserLoginQuery query) throws InputException {
+        Token token = authLogic.login(query.getUsername(), query.getPassword());
+        return ResponseDTO.success(token);
     }
 }

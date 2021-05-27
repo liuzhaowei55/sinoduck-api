@@ -19,11 +19,11 @@ public class FolderService {
     private FolderRepository folderRepository;
 
     public Folder createFolder(@NotNull User user, @NotBlank String title) throws ErrorResponseException {
-        if (folderRepository.existsByUserAndTitle(user, title)) {
+        if (folderRepository.existsByUserIdAndTitle(user.getId(), title)) {
             throw new ErrorResponseException("B0000", "文件夹名称已存在");
         }
         Folder folder = new Folder();
-        folder.setUser(user);
+        folder.setUserId(user.getId());
         folder.setTitle(title);
         return this.folderRepository.saveAndFlush(folder);
     }
