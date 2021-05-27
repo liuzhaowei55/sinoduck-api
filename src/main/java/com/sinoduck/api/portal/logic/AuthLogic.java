@@ -1,5 +1,7 @@
 package com.sinoduck.api.portal.logic;
 
+import com.sinoduck.api.exception.CustomErrorEnum;
+import com.sinoduck.api.exception.ErrorResponseException;
 import com.sinoduck.api.exception.InputException;
 import com.sinoduck.api.model.entity.Token;
 import com.sinoduck.api.model.entity.User;
@@ -7,6 +9,7 @@ import com.sinoduck.api.model.repository.TokenRepository;
 import com.sinoduck.api.model.repository.UserRepository;
 import com.sinoduck.api.portal.pojo.query.CreateUserQuery;
 import com.sinoduck.api.service.UserService;
+import com.sinoduck.api.util.ThreadGlobalInfoContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -41,5 +44,13 @@ public class AuthLogic {
             throw new InputException("password", "密码错误");
         }
         return userService.login(optionalUser.get());
+    }
+
+    public void logout() throws ErrorResponseException {
+        Token token = ThreadGlobalInfoContextHolder.getToken();
+        if (null==token) {
+            throw new ErrorResponseException(CustomErrorEnum.CURRENT_USER_NOT_FOUND);
+        }
+        this.tokenRepository.delete(token);
     }
 }

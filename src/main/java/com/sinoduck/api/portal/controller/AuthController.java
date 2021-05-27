@@ -1,5 +1,7 @@
 package com.sinoduck.api.portal.controller;
 
+import com.sinoduck.api.exception.CustomErrorEnum;
+import com.sinoduck.api.exception.ErrorResponseException;
 import com.sinoduck.api.exception.InputException;
 import com.sinoduck.api.model.entity.Token;
 import com.sinoduck.api.model.entity.User;
@@ -7,11 +9,9 @@ import com.sinoduck.api.pojo.dto.ResponseDTO;
 import com.sinoduck.api.portal.logic.AuthLogic;
 import com.sinoduck.api.portal.pojo.query.CreateUserQuery;
 import com.sinoduck.api.portal.pojo.query.UserLoginQuery;
+import com.sinoduck.api.util.ThreadGlobalInfoContextHolder;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -43,5 +43,11 @@ public class AuthController {
     public ResponseDTO login(@Valid @RequestBody UserLoginQuery query) throws InputException {
         Token token = authLogic.login(query.getUsername(), query.getPassword());
         return ResponseDTO.success(token);
+    }
+
+    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "/logout")
+    public ResponseDTO logout() throws ErrorResponseException {
+        this.authLogic.logout();
+        return ResponseDTO.success();
     }
 }

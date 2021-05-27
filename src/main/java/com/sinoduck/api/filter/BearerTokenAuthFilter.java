@@ -1,6 +1,8 @@
 package com.sinoduck.api.filter;
 
+import com.sinoduck.api.model.entity.Token;
 import com.sinoduck.api.model.entity.User;
+import com.sinoduck.api.model.repository.TokenRepository;
 import com.sinoduck.api.model.repository.UserRepository;
 import com.sinoduck.api.util.ThreadGlobalInfoContextHolder;
 import lombok.extern.slf4j.Slf4j;
@@ -22,15 +24,22 @@ public class BearerTokenAuthFilter implements Filter {
 
     @Resource
     private UserRepository userRepository;
+    @Resource
+    private TokenRepository tokenRepository;
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         String authorization = httpServletRequest.getHeader("Authorization");
         if (authorization.startsWith(BEARER_TOKEN_PREFIX)) {
-            String username = authorization.substring(7);
-            Optional<User> optionalUser = userRepository.findFirstByUsername(username);
-            optionalUser.ifPresent(ThreadGlobalInfoContextHolder::setUser);
+            String accessToken = authorization.substring(7);
+            Optional<Token> optionalToken = tokenRepository.findFirstByAccessToken(accessToken);
+            optionalToken.ifPresent(token -> {
+                ThreadGlobalInfoContextHolder.setToken(token);
+                Optional<User> optionalUser = userRepository.findById(token.getUserId());
+                optionalUser.ifPresent(ThreadGlobalInfoContextHolder::setUser);
+            });
+
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }
