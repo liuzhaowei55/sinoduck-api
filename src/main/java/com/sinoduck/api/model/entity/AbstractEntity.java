@@ -7,7 +7,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @author where.liu
@@ -25,15 +25,15 @@ public abstract class AbstractEntity {
     private Integer version;
     @Basic
     @JsonIgnore
-    private Date deletedAt;
+    private LocalDateTime deletedAt;
     @Basic
     @JsonIgnore
     @LastModifiedDate
     @Column(nullable = false, updatable = false)
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
     @Basic
     @JsonIgnore
     @CreatedDate
     @Column(nullable = false)
-    private Date createdAt;
+    private LocalDateTime createdAt;
 }
