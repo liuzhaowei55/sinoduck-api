@@ -21,4 +21,11 @@ import javax.persistence.Table;
 @Table(name = "place")
 @EntityListeners(AuditingEntityListener.class)
 public class Place extends AbstractEntity {
+    private String districtCode;
+    private String name;
+    private Double longitude;
+    private Double latitude;
+    private String address;
+    private String memo;
+    private String extra;
 }

@@ -18,9 +18,9 @@ import javax.persistence.Table;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "city_option")
+@Table(name = "district")
 @EntityListeners(AuditingEntityListener.class)
-public class CityOption extends AbstractEntity {
+public class District extends AbstractEntity {
     private String code;
     private String name;
 }

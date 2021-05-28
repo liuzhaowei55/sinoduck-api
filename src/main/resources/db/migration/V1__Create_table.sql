@@ -56,7 +56,7 @@ CREATE TABLE `folder`
   DEFAULT CHARSET = `utf8mb4`
   COLLATE = `utf8mb4_unicode_ci` COMMENT ='文件夹表';
 
-CREATE TABLE `city_option`
+CREATE TABLE `district`
 (
     `id`         BIGINT UNSIGNED AUTO_INCREMENT         NOT NULL COMMENT '主键',
     `code`       VARCHAR(16)  DEFAULT ''                NOT NULL COMMENT '编码',
