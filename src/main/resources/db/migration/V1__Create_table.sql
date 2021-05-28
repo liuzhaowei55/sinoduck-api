@@ -55,3 +55,22 @@ CREATE TABLE `folder`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = `utf8mb4`
   COLLATE = `utf8mb4_unicode_ci` COMMENT ='文件夹表';
+
+CREATE TABLE `city_option`
+(
+    `id`           BIGINT UNSIGNED AUTO_INCREMENT         NOT NULL COMMENT '主键',
+    `code`         VARCHAR(16)  DEFAULT ''                NOT NULL COMMENT '编码',
+    `name`         VARCHAR(32)  DEFAULT ''                NOT NULL COMMENT '名称',
+    `version`      INT UNSIGNED DEFAULT 0                 NOT NULL COMMENT '乐观锁',
+    `deleted_at`   TIMESTAMP    DEFAULT NULL              NULL COMMENT '删除时间',
+    `updated_at`   TIMESTAMP    DEFAULT CURRENT_TIMESTAMP NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `created_at`   TIMESTAMP    DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT '创建时间',
+    PRIMARY KEY (`id`),
+    INDEX `idx_code` (`code`),
+    INDEX `idx_name` (`name`),
+    INDEX `idx_deleted_at` (`deleted_at`),
+    INDEX `idx_created_at` (`created_at`),
+    INDEX `idx_updated_at` (`updated_at`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = `utf8mb4`
+  COLLATE = `utf8mb4_unicode_ci` COMMENT ='可选城市列表';
