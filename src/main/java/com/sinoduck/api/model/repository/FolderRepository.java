@@ -17,4 +17,11 @@ public interface FolderRepository extends JpaRepository<Folder, Long> {
     Boolean existsByUserIdAndTitle(Long userId, String title);
 
     List<Folder> findAllByUserId(Long userId);
+
+    /**
+     * 删除指定用户的所有文件夹
+     *
+     * @param userId 用户ID
+     */
+    void deleteByUserId(Long userId);
 }

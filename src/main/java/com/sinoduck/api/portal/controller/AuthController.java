@@ -1,16 +1,14 @@
 package com.sinoduck.api.portal.controller;
 
-import com.sinoduck.api.exception.CustomErrorEnum;
 import com.sinoduck.api.exception.ErrorResponseException;
 import com.sinoduck.api.exception.InputException;
 import com.sinoduck.api.model.entity.Token;
 import com.sinoduck.api.model.entity.User;
 import com.sinoduck.api.pojo.dto.ResponseDTO;
 import com.sinoduck.api.portal.logic.AuthLogic;
+import com.sinoduck.api.portal.pojo.converter.UserConverter;
 import com.sinoduck.api.portal.pojo.query.CreateUserQuery;
 import com.sinoduck.api.portal.pojo.query.UserLoginQuery;
-import com.sinoduck.api.util.ThreadGlobalInfoContextHolder;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -36,7 +34,7 @@ public class AuthController {
             throw new InputException("password", "密码和确认密码需要一致");
         }
         User user = authLogic.createUser(query);
-        return ResponseDTO.success(user);
+        return ResponseDTO.success(UserConverter.INSTANCE.toUserProfileDTO(user));
     }
 
     @PostMapping(value = "/login")

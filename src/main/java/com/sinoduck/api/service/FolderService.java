@@ -27,4 +27,13 @@ public class FolderService {
         folder.setTitle(title);
         return this.folderRepository.saveAndFlush(folder);
     }
+
+    /**
+     * 删除指定用户下的所有文件夹
+     *
+     * @param user 用户
+     */
+    public void delete(@NotNull User user) {
+        this.folderRepository.deleteByUserId(user.getId());
+    }
 }
