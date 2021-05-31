@@ -5,6 +5,7 @@ import cn.hutool.core.net.URLDecoder;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -17,6 +18,9 @@ import java.io.IOException;
 @Service
 public class AMapPlaceManager {
     private final OkHttpClient client;
+
+    @Value("${application.manager.amap.web-api-key}")
+    private String aMapKey;
 
     public AMapPlaceManager() {
         this.client = new OkHttpClient();
