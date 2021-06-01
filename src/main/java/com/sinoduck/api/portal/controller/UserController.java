@@ -1,6 +1,7 @@
 package com.sinoduck.api.portal.controller;
 
 import com.sinoduck.api.exception.ErrorResponseException;
+import com.sinoduck.api.exception.InputException;
 import com.sinoduck.api.model.entity.User;
 import com.sinoduck.api.pojo.dto.ResponseDTO;
 import com.sinoduck.api.portal.logic.UserLogic;
@@ -39,7 +40,8 @@ public class UserController {
      * @return 用户删除自己的账户
      */
     @PostMapping(value = "/delete")
-    public ResponseDTO delete(@Valid @RequestBody DeleteUserQuery query) {
+    public ResponseDTO delete(@Valid @RequestBody DeleteUserQuery query) throws InputException, ErrorResponseException {
+        this.userLogic.delete(query);
         return ResponseDTO.success();
     }
 }
