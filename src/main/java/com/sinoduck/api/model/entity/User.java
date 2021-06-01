@@ -27,6 +27,7 @@ public class User extends AbstractEntity {
     private String username;
     @JsonIgnore
     private String password;
+    private String nickname;
     private String avatar;
 
     public void setPassword(String password) {

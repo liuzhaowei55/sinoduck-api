@@ -6,9 +6,11 @@ import com.sinoduck.api.exception.InputException;
 import com.sinoduck.api.model.entity.User;
 import com.sinoduck.api.model.repository.UserRepository;
 import com.sinoduck.api.portal.pojo.query.ChangePasswordQuery;
+import com.sinoduck.api.portal.pojo.query.ChangeProfileQuery;
 import com.sinoduck.api.portal.pojo.query.DeleteUserQuery;
 import com.sinoduck.api.service.FolderService;
 import com.sinoduck.api.util.ThreadGlobalInfoContextHolder;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -58,5 +60,17 @@ public class UserLogic {
         }
         user.setPassword(query.getNewPassword());
         this.userRepository.save(user);
+    }
+
+    public User changeProfile(ChangeProfileQuery query) throws ErrorResponseException {
+        User user = ThreadGlobalInfoContextHolder.getUser();
+        if (null==user) {
+            throw new ErrorResponseException(CustomErrorEnum.CURRENT_USER_NOT_FOUND);
+        }
+        if (StringUtils.isNoneBlank(query.getNickname())) {
+            user.setNickname(query.getNickname());
+        }
+        userRepository.save(user);
+        return user;
     }
 }
