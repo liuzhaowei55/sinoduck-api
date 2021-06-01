@@ -4,6 +4,8 @@ import com.sinoduck.api.exception.CustomErrorEnum;
 import com.sinoduck.api.exception.ErrorResponseException;
 import com.sinoduck.api.exception.InputException;
 import com.sinoduck.api.model.entity.User;
+import com.sinoduck.api.model.repository.UserRepository;
+import com.sinoduck.api.portal.pojo.query.ChangePasswordQuery;
 import com.sinoduck.api.portal.pojo.query.DeleteUserQuery;
 import com.sinoduck.api.service.FolderService;
 import com.sinoduck.api.util.ThreadGlobalInfoContextHolder;
@@ -18,6 +20,8 @@ import javax.annotation.Resource;
 public class UserLogic {
     @Resource
     private FolderService folderService;
+    @Resource
+    private UserRepository userRepository;
 
     public User profile() throws ErrorResponseException {
         User user = ThreadGlobalInfoContextHolder.getUser();
@@ -37,5 +41,22 @@ public class UserLogic {
         }
         // 删除所有的文件夹
         this.folderService.delete(user);
+    }
+
+    public void changePassword(ChangePasswordQuery query) throws ErrorResponseException, InputException {
+        User user = ThreadGlobalInfoContextHolder.getUser();
+        if (null==user) {
+            throw new ErrorResponseException(CustomErrorEnum.CURRENT_USER_NOT_FOUND);
+        }
+        // 校验旧密码是否正确
+        if (!user.checkPassword(query.getOldPassword())) {
+            throw new InputException("oldPassword", "密码错误");
+        }
+        // 校验新密码和确认密码是否相等
+        if (!query.getNewPasswordConfirmation().equals(query.getNewPassword())) {
+            throw new InputException("newPasswordConfirmation", "确认密码与新密码不一致");
+        }
+        user.setPassword(query.getNewPassword());
+        this.userRepository.save(user);
     }
 }

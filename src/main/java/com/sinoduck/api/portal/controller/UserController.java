@@ -6,6 +6,7 @@ import com.sinoduck.api.model.entity.User;
 import com.sinoduck.api.pojo.dto.ResponseDTO;
 import com.sinoduck.api.portal.logic.UserLogic;
 import com.sinoduck.api.portal.pojo.converter.UserConverter;
+import com.sinoduck.api.portal.pojo.query.ChangePasswordQuery;
 import com.sinoduck.api.portal.pojo.query.DeleteUserQuery;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +33,17 @@ public class UserController {
     public ResponseDTO profile() throws ErrorResponseException {
         User user = this.userLogic.profile();
         return ResponseDTO.success(UserConverter.INSTANCE.toUserProfileDTO(user));
+    }
+
+    /**
+     * 修改密码
+     *
+     * @return ResponseDTO
+     */
+    @PostMapping(value = "/password/change")
+    public ResponseDTO changePassword(ChangePasswordQuery query) throws InputException, ErrorResponseException {
+        this.userLogic.changePassword(query);
+        return ResponseDTO.success();
     }
 
     /**
