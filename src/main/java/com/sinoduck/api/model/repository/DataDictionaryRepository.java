@@ -29,4 +29,12 @@ public interface DataDictionaryRepository extends JpaRepository<DataDictionary, 
      * @return row
      */
     DataDictionary findFirstByKey(String key);
+
+    /**
+     * 判断 key 是否存在
+     *
+     * @param key key
+     * @return true 存在
+     */
+    Boolean existsByKey(String key);
 }
