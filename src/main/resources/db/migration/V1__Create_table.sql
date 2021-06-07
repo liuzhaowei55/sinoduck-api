@@ -97,3 +97,25 @@ CREATE TABLE `place`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = `utf8mb4`
   COLLATE = `utf8mb4_unicode_ci` COMMENT ='地址';
+
+CREATE TABLE `data_dictionary`
+(
+    `id`         BIGINT UNSIGNED AUTO_INCREMENT          NOT NULL COMMENT '主键',
+    `name`       VARCHAR(255)  DEFAULT ''                NOT NULL COMMENT '名称',
+    `key`        VARCHAR(255)  DEFAULT ''                NOT NULL COMMENT 'key',
+    `value`      VARCHAR(4096) DEFAULT ''                NOT NULL COMMENT 'value',
+    `type`       VARCHAR(16)   DEFAULT ''                NOT NULL COMMENT 'value 类型,string,numeric,json',
+    `memo`       VARCHAR(255)  DEFAULT ''                NOT NULL COMMENT '备注',
+    `version`    INT UNSIGNED  DEFAULT 0                 NOT NULL COMMENT '乐观锁',
+    `deleted_at` TIMESTAMP     DEFAULT NULL              NULL COMMENT '删除时间',
+    `updated_at` TIMESTAMP     DEFAULT CURRENT_TIMESTAMP NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `created_at` TIMESTAMP     DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT '创建时间',
+    PRIMARY KEY (`id`),
+    INDEX `idx_name` (`name`),
+    INDEX `idx_key` (`key`),
+    INDEX `idx_deleted_at` (`deleted_at`),
+    INDEX `idx_created_at` (`created_at`),
+    INDEX `idx_updated_at` (`updated_at`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = `utf8mb4`
+  COLLATE = `utf8mb4_unicode_ci` COMMENT ='数据字典';
