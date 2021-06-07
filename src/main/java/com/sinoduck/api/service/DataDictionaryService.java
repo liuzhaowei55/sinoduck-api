@@ -4,11 +4,14 @@ import com.sinoduck.api.model.entity.DataDictionary;
 import com.sinoduck.api.model.repository.DataDictionaryRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
+import org.redisson.api.RBucket;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotNull;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -44,7 +47,26 @@ public class DataDictionaryService {
         return null;
     }
 
+    public DataDictionary get(@NotNull String key) {
+        DataDictionary dataDictionary = null;
+        RBucket<DataDictionary> rBucket = redissonClient.getBucket(this.getRedisCacheKey(key));
+        if (rBucket.isExists()) {
+            dataDictionary = rBucket.get();
+        } else {
+            Optional<DataDictionary> optionalDataDictionary = this.dataDictionaryRepository.findFirstByKey(key);
+            if (optionalDataDictionary.isPresent()) {
+                rBucket.set(optionalDataDictionary.get(), 5, TimeUnit.MINUTES);
+                dataDictionary = optionalDataDictionary.get();
+            }
+        }
+        return dataDictionary;
+    }
+
     private String getRedisLockKey(String key) {
-        return "data_dictionary:key:" + key;
+        return "data_dictionary:lock:key:" + key;
+    }
+
+    private String getRedisCacheKey(String key) {
+        return "data_dictionary:cache:key:" + key;
     }
 }

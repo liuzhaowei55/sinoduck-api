@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author where.liu
@@ -28,7 +29,7 @@ public interface DataDictionaryRepository extends JpaRepository<DataDictionary, 
      * @param key key
      * @return row
      */
-    DataDictionary findFirstByKey(String key);
+    Optional<DataDictionary> findFirstByKey(String key);
 
     /**
      * 判断 key 是否存在
