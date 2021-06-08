@@ -3,7 +3,6 @@ package com.sinoduck.api.service;
 import com.sinoduck.api.model.entity.DataDictionary;
 import com.sinoduck.api.model.repository.DataDictionaryRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.Redisson;
 import org.redisson.api.RBucket;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
