@@ -29,6 +29,7 @@ public class DataDictionaryService {
     private final static Integer LOCK_WAIT_SECONDS = 5;
 
     public DataDictionary add(DataDictionary dataDictionary) {
+        this.dataDictionaryRepository.saveAndFlush(dataDictionary);
         RLock rLock = redissonClient.getLock(this.getRedisLockKey(dataDictionary.getKey()));
         try {
             if (rLock.tryLock(LOCK_WAIT_SECONDS, LOCK_SECONDS, TimeUnit.SECONDS)) {

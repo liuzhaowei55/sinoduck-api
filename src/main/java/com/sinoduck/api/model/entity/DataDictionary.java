@@ -1,6 +1,5 @@
 package com.sinoduck.api.model.entity;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -8,7 +7,9 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.Table;
 
 /**
  * @author where.liu
@@ -24,8 +25,7 @@ public class DataDictionary extends AbstractEntity {
     private String name;
     private String key;
     private String value;
-    @Enumerated(EnumType.STRING)
-    private TypeEnum type;
+    private String type;
     private String memo;
 
     public enum TypeEnum {
@@ -45,7 +45,7 @@ public class DataDictionary extends AbstractEntity {
         @Getter
         private final String code;
 
-        private TypeEnum(String code) {
+        TypeEnum(String code) {
             this.code = code;
         }
 
