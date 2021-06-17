@@ -2,7 +2,7 @@ package com.sinoduck.api.portal.controller;
 
 import com.sinoduck.api.exception.ErrorResponseException;
 import com.sinoduck.api.exception.InputException;
-import com.sinoduck.api.model.entity.Token;
+import com.sinoduck.api.model.entity.UserToken;
 import com.sinoduck.api.model.entity.User;
 import com.sinoduck.api.pojo.dto.ResponseDTO;
 import com.sinoduck.api.portal.logic.AuthLogic;
@@ -39,7 +39,7 @@ public class AuthController {
 
     @PostMapping(value = "/login")
     public ResponseDTO login(@Valid @RequestBody UserLoginQuery query) throws InputException {
-        Token token = authLogic.login(query.getUsername(), query.getPassword());
+        UserToken token = authLogic.login(query.getUsername(), query.getPassword());
         return ResponseDTO.success(token);
     }
 

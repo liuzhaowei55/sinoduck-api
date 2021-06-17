@@ -11,17 +11,21 @@ import javax.persistence.EntityListeners;
 import javax.persistence.Table;
 
 /**
+ * 登录凭证
+ *
  * @author where.liu
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Entity
 @DynamicInsert
 @DynamicUpdate
-@Entity
-@Table(name = "user")
+@Table(name = "user_token")
 @EntityListeners(AuditingEntityListener.class)
-public class User extends AbstractEntity {
-    private String username;
-    private String nickname;
-    private String avatar;
+public class UserToken extends AbstractEntity {
+    private Long userId;
+    private Long userPasswordId;
+    private String accessToken;
+    private String ua;
+    private String ip;
 }
