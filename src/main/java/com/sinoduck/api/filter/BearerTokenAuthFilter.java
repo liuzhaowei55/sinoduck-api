@@ -6,6 +6,7 @@ import com.sinoduck.api.model.repository.UserTokenRepository;
 import com.sinoduck.api.model.repository.UserRepository;
 import com.sinoduck.api.util.ThreadGlobalInfoContextHolder;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.*;
@@ -31,7 +32,7 @@ public class BearerTokenAuthFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         String authorization = httpServletRequest.getHeader("Authorization");
-        if (authorization.startsWith(BEARER_TOKEN_PREFIX)) {
+        if (StringUtils.isNotEmpty(authorization) && authorization.startsWith(BEARER_TOKEN_PREFIX)) {
             String accessToken = authorization.substring(7);
             Optional<UserToken> optionalToken = userTokenRepository.findFirstByAccessToken(accessToken);
             optionalToken.ifPresent(token -> {
