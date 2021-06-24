@@ -52,7 +52,7 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
     }
 
     @Override
-    public <T> T getStructData(String key, Class<T> clazz) {
+    public <T> T getObjectValue(String key, Class<T> clazz) {
         Optional<DataDictionary> optionalDataDictionary = this.dataDictionaryRepository.findFirstByKey(key);
         if (optionalDataDictionary.isEmpty()) {
             return null;

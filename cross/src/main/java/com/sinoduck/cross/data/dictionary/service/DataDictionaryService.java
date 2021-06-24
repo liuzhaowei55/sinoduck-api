@@ -9,6 +9,14 @@ import com.sinoduck.api.model.entity.DataDictionary;
  */
 public interface DataDictionaryService {
     /**
+     * 获取数字
+     *
+     * @param key key
+     * @return 字符串
+     */
+    String getStringValue(String key);
+
+    /**
      * 获取整数
      *
      * @param key key
@@ -17,12 +25,13 @@ public interface DataDictionaryService {
     Integer getIntegerValue(String key);
 
     /**
-     * 获取数字
+     * 获取一个 json 的反序化结果
      *
-     * @param key key
-     * @return 字符串
+     * @param key   key
+     * @param clazz value 反序列化的结构
+     * @return 结果
      */
-    String getStringValue(String key);
+    <T> T getObjectValue(String key, Class<T> clazz);
 
     /**
      * 添加记录
@@ -46,13 +55,4 @@ public interface DataDictionaryService {
      * @return 新的记录
      */
     DataDictionary modify(DataDictionary dictionary);
-
-    /**
-     * 获取一个 json 的反序化结果
-     *
-     * @param key   key
-     * @param clazz value 反序列化的结构
-     * @return 结果
-     */
-    <T> T getStructData(String key, Class<T> clazz);
 }
