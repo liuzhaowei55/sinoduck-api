@@ -2,6 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <modules>
+        <module>cross</module>
+    </modules>
     <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -55,6 +59,12 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-core</artifactId>
             <version>${cn.hutool.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.76</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.redisson/redisson-spring-boot-starter -->
         <dependency>
