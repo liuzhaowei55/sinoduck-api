@@ -1,8 +1,8 @@
 package com.sinoduck.cross.data.dictionary.service;
 
 import com.alibaba.fastjson.JSON;
-import com.sinoduck.api.model.entity.DataDictionary;
-import com.sinoduck.api.model.repository.DataDictionaryRepository;
+import com.sinoduck.db.entity.DataDictionary;
+import com.sinoduck.db.repository.DataDictionaryRepository;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;

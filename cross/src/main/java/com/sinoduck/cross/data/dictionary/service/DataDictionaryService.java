@@ -1,6 +1,6 @@
 package com.sinoduck.cross.data.dictionary.service;
 
-import com.sinoduck.api.model.entity.DataDictionary;
+import com.sinoduck.db.entity.DataDictionary;
 
 /**
  * 数据字典操作方法
