@@ -1,6 +1,6 @@
 package com.sinoduck.manage.service.portal.pojo.converter;
 
-import com.sinoduck.db.entity.Folder;
+import com.sinoduck.api.db.entity.Folder;
 import com.sinoduck.manage.service.portal.pojo.dto.FolderDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

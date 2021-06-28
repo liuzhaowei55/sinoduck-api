@@ -1,6 +1,6 @@
 package com.sinoduck.manage.service.portal.controller;
 
-import com.sinoduck.db.entity.Folder;
+import com.sinoduck.api.db.entity.Folder;
 import com.sinoduck.manage.service.exception.ErrorResponseException;
 import com.sinoduck.manage.service.pojo.dto.ResponseDTO;
 import com.sinoduck.manage.service.portal.pojo.converter.FolderDtoConverter;

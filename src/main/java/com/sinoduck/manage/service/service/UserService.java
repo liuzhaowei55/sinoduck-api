@@ -1,12 +1,12 @@
 package com.sinoduck.manage.service.service;
 
 import cn.hutool.core.util.RandomUtil;
-import com.sinoduck.db.entity.User;
-import com.sinoduck.db.entity.UserPassword;
-import com.sinoduck.db.entity.UserToken;
-import com.sinoduck.db.repository.UserPasswordRepository;
-import com.sinoduck.db.repository.UserRepository;
-import com.sinoduck.db.repository.UserTokenRepository;
+import com.sinoduck.api.db.entity.User;
+import com.sinoduck.api.db.entity.UserPassword;
+import com.sinoduck.api.db.entity.UserToken;
+import com.sinoduck.api.db.repository.UserPasswordRepository;
+import com.sinoduck.api.db.repository.UserRepository;
+import com.sinoduck.api.db.repository.UserTokenRepository;
 import com.sinoduck.manage.service.portal.pojo.query.CreateUserQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

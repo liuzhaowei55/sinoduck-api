@@ -1,8 +1,8 @@
 package com.sinoduck.manage.service.portal.logic;
 
-import com.sinoduck.db.entity.Folder;
-import com.sinoduck.db.entity.User;
-import com.sinoduck.db.repository.FolderRepository;
+import com.sinoduck.api.db.entity.Folder;
+import com.sinoduck.api.db.entity.User;
+import com.sinoduck.api.db.repository.FolderRepository;
 import com.sinoduck.manage.service.exception.CustomErrorEnum;
 import com.sinoduck.manage.service.exception.ErrorResponseException;
 import com.sinoduck.manage.service.service.FolderService;

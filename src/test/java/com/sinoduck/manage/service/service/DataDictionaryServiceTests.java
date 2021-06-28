@@ -1,7 +1,7 @@
 package com.sinoduck.manage.service.service;
 
-import com.sinoduck.db.entity.DataDictionary;
-import com.sinoduck.db.repository.DataDictionaryRepository;
+import com.sinoduck.api.db.entity.DataDictionary;
+import com.sinoduck.api.db.repository.DataDictionaryRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

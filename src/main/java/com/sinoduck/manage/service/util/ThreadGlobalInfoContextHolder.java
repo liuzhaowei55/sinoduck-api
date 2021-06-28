@@ -1,7 +1,7 @@
 package com.sinoduck.manage.service.util;
 
-import com.sinoduck.db.entity.UserToken;
-import com.sinoduck.db.entity.User;
+import com.sinoduck.api.db.entity.UserToken;
+import com.sinoduck.api.db.entity.User;
 
 /**
  * @author where.liu

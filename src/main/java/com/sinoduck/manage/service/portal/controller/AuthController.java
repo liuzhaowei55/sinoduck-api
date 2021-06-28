@@ -2,8 +2,8 @@ package com.sinoduck.manage.service.portal.controller;
 
 import com.sinoduck.manage.service.exception.ErrorResponseException;
 import com.sinoduck.manage.service.exception.InputException;
-import com.sinoduck.db.entity.UserToken;
-import com.sinoduck.db.entity.User;
+import com.sinoduck.api.db.entity.UserToken;
+import com.sinoduck.api.db.entity.User;
 import com.sinoduck.manage.service.pojo.dto.ResponseDTO;
 import com.sinoduck.manage.service.portal.logic.AuthLogic;
 import com.sinoduck.manage.service.portal.pojo.converter.UserConverter;

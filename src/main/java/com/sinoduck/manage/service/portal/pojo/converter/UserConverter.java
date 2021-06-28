@@ -1,6 +1,6 @@
 package com.sinoduck.manage.service.portal.pojo.converter;
 
-import com.sinoduck.db.entity.User;
+import com.sinoduck.api.db.entity.User;
 import com.sinoduck.manage.service.portal.pojo.dto.UserProfileDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

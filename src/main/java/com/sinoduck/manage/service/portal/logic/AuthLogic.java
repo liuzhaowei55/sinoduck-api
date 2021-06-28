@@ -1,9 +1,9 @@
 package com.sinoduck.manage.service.portal.logic;
 
-import com.sinoduck.db.entity.User;
-import com.sinoduck.db.entity.UserToken;
-import com.sinoduck.db.repository.UserRepository;
-import com.sinoduck.db.repository.UserTokenRepository;
+import com.sinoduck.api.db.entity.User;
+import com.sinoduck.api.db.entity.UserToken;
+import com.sinoduck.api.db.repository.UserRepository;
+import com.sinoduck.api.db.repository.UserTokenRepository;
 import com.sinoduck.manage.service.exception.CustomErrorEnum;
 import com.sinoduck.manage.service.exception.ErrorResponseException;
 import com.sinoduck.manage.service.exception.InputException;

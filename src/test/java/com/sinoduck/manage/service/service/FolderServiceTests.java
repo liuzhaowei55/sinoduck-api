@@ -1,8 +1,8 @@
 package com.sinoduck.manage.service.service;
 
 import com.sinoduck.manage.service.exception.ErrorResponseException;
-import com.sinoduck.db.entity.Folder;
-import com.sinoduck.db.entity.User;
+import com.sinoduck.api.db.entity.Folder;
+import com.sinoduck.api.db.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
