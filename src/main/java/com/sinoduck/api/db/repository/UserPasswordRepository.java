@@ -2,6 +2,7 @@ package com.sinoduck.api.db.repository;
 
 import com.sinoduck.api.db.entity.UserPassword;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -9,6 +10,7 @@ import java.util.Optional;
 /**
  * @author where.liu
  */
+@Repository
 public interface UserPasswordRepository extends JpaRepository<UserPassword, Long> {
     /**
      * 查询用户最后一个未删除的密码
