@@ -1,4 +1,4 @@
-package com.sinoduck.api.web;
+package com.sinoduck.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
