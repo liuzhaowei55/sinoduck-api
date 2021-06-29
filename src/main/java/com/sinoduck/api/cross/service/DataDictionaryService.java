@@ -34,25 +34,33 @@ public interface DataDictionaryService {
     <T> T getObjectValue(String key, Class<T> clazz);
 
     /**
+     * 获取字典
+     *
+     * @param key key
+     * @return 字典
+     */
+    DataDictionary get(String key);
+
+    /**
      * 添加记录
      *
-     * @param dictionary 记录
+     * @param dataDictionary 记录
      * @return 记录
      */
-    DataDictionary add(DataDictionary dictionary);
+    DataDictionary add(DataDictionary dataDictionary);
 
     /**
      * 删除记录
      *
-     * @param dictionary 删除
+     * @param dataDictionary 删除
      */
-    void delete(DataDictionary dictionary);
+    void delete(DataDictionary dataDictionary);
 
     /**
      * 更新
      *
-     * @param dictionary 记录
+     * @param dataDictionary 记录
      * @return 新的记录
      */
-    DataDictionary modify(DataDictionary dictionary);
+    DataDictionary modify(DataDictionary dataDictionary);
 }
