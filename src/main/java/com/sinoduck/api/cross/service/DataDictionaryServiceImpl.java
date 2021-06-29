@@ -1,15 +1,17 @@
 package com.sinoduck.api.cross.service;
 
-import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sinoduck.api.db.entity.DataDictionary;
 import com.sinoduck.api.db.repository.DataDictionaryRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBucket;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -18,12 +20,16 @@ import java.util.concurrent.TimeUnit;
  * @author where
  */
 @Service
+@Slf4j
 public class DataDictionaryServiceImpl implements DataDictionaryService {
     @Resource
     private DataDictionaryRepository dataDictionaryRepository;
 
     @Resource
     private RedissonClient redissonClient;
+
+    @Resource
+    private ObjectMapper objectMapper;
 
     private final static Integer LOCK_SECONDS = 5;
     private final static Integer LOCK_WAIT_SECONDS = 5;
@@ -84,7 +90,14 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
         if (optionalDataDictionary.isEmpty()) {
             return null;
         }
-        return JSON.parseObject(optionalDataDictionary.get().getValue(), clazz);
+        try {
+            return objectMapper.readValue(optionalDataDictionary.get().getValue(), clazz);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            log.error("json parse error", e);
+        }
+
+        return null;
     }
 
     @Override

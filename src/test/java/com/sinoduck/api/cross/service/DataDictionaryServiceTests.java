@@ -1,6 +1,7 @@
 package com.sinoduck.api.cross.service;
 
 import cn.hutool.core.lang.Assert;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sinoduck.api.db.entity.DataDictionary;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
