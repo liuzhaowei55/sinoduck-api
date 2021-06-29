@@ -2,6 +2,8 @@ package com.sinoduck.api.cross.service;
 
 import com.sinoduck.api.db.entity.DataDictionary;
 
+import java.util.Optional;
+
 /**
  * 数据字典操作方法
  *
@@ -39,7 +41,7 @@ public interface DataDictionaryService {
      * @param key key
      * @return 字典
      */
-    DataDictionary get(String key);
+    Optional<DataDictionary> get(String key);
 
     /**
      * 添加记录

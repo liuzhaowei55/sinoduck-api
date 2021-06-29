@@ -100,19 +100,19 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
     }
 
     @Override
-    public DataDictionary get(String key) {
-        DataDictionary dataDictionary = null;
+    public Optional<DataDictionary> get(String key) {
+        Optional<DataDictionary> optionalDataDictionary = Optional.empty();
         RBucket<DataDictionary> rBucket = redissonClient.getBucket(this.getRedisCacheKey(key));
         if (rBucket.isExists()) {
-            dataDictionary = rBucket.get();
+            optionalDataDictionary = Optional.of(rBucket.get());
         } else {
-            Optional<DataDictionary> optionalDataDictionary = this.dataDictionaryRepository.findFirstByKey(key);
-            if (optionalDataDictionary.isPresent()) {
-                rBucket.set(optionalDataDictionary.get(), 5, TimeUnit.MINUTES);
-                dataDictionary = optionalDataDictionary.get();
+            Optional<DataDictionary> row = this.dataDictionaryRepository.findFirstByKey(key);
+            if (row.isPresent()) {
+                rBucket.set(row.get(), 5, TimeUnit.MINUTES);
+                optionalDataDictionary = row;
             }
         }
-        return dataDictionary;
+        return optionalDataDictionary;
     }
 
     private String getRedisLockKey(String key) {
