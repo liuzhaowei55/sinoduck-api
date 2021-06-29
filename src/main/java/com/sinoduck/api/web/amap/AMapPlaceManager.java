@@ -41,7 +41,7 @@ public class AMapPlaceManager {
             Response response = client.newCall(request).execute();
             log.error("resp: {}", response.body().string());
         } catch (IOException e) {
-            log.error(": {}", e);
+            log.error("aMap", e);
         }
 
 
