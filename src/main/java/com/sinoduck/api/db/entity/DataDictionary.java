@@ -2,7 +2,6 @@ package com.sinoduck.api.db.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import lombok.Getter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
@@ -31,7 +30,8 @@ public class DataDictionary {
     /**
      * @see TypeEnum
      */
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private TypeEnum type;
     private String memo;
 
     @Version
@@ -54,26 +54,14 @@ public class DataDictionary {
         /**
          * 值类型：字符串
          */
-        STRING("STRING"),
+        STRING,
         /**
          * 值类型：数字
          */
-        NUMERIC("NUMERIC"),
+        NUMERIC,
         /**
          * 值类型：JSON 字符串
          */
-        JSON("JSON");
-
-        @Getter
-        private final String code;
-
-        TypeEnum(String code) {
-            this.code = code;
-        }
-
-        @Override
-        public String toString() {
-            return this.code;
-        }
+        JSON;
     }
 }

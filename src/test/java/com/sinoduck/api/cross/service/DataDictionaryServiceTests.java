@@ -21,7 +21,7 @@ public class DataDictionaryServiceTests {
         dataDictionary.setName("name");
         dataDictionary.setKey("key");
         dataDictionary.setValue("value");
-        dataDictionary.setType(DataDictionary.TypeEnum.STRING.getCode());
+        dataDictionary.setType(DataDictionary.TypeEnum.STRING);
         dataDictionary = this.dataDictionaryService.add(dataDictionary);
         log.info("dataDictionary: {}", dataDictionary);
         Assert.isTrue(dataDictionary.getId() >= 1L);
