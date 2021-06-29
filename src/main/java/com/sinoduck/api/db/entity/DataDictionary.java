@@ -28,6 +28,9 @@ public class DataDictionary {
     private String name;
     private String key;
     private String value;
+    /**
+     * @see TypeEnum
+     */
     private String type;
     private String memo;
 
