@@ -32,10 +32,32 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
 
     private final static Integer LOCK_SECONDS = 5;
     private final static Integer LOCK_WAIT_SECONDS = 5;
+    private final static Integer CACHE_MINUTES = 60;
+
+    @Override
+    public Optional<DataDictionary> get(String key) {
+        RBucket<DataDictionary> rBucket = redissonClient.getBucket(this.getRedisCacheKey(key));
+        if (rBucket.isExists()) {
+            return Optional.of(rBucket.get());
+        }
+        Optional<DataDictionary> row = this.dataDictionaryRepository.findFirstByKey(key);
+        row.ifPresent(dataDictionary -> rBucket.set(dataDictionary, CACHE_MINUTES, TimeUnit.MINUTES));
+        return row;
+    }
+
+    @Override
+    public String getStringValue(String key) {
+        Optional<DataDictionary> optionalDataDictionary = this.get(key);
+        if (optionalDataDictionary.isEmpty()) {
+            return null;
+        } else {
+            return optionalDataDictionary.get().getValue();
+        }
+    }
 
     @Override
     public Integer getIntegerValue(String key) {
-        Optional<DataDictionary> optionalDataDictionary = this.dataDictionaryRepository.findFirstByKey(key);
+        Optional<DataDictionary> optionalDataDictionary = this.get(key);
         if (optionalDataDictionary.isEmpty()) {
             return null;
         }
@@ -44,13 +66,19 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
     }
 
     @Override
-    public String getStringValue(String key) {
-        Optional<DataDictionary> optionalDataDictionary = this.dataDictionaryRepository.findFirstByKey(key);
+    public <T> T getObjectValue(String key, Class<T> clazz) {
+        Optional<DataDictionary> optionalDataDictionary = this.get(key);
         if (optionalDataDictionary.isEmpty()) {
             return null;
-        } else {
-            return optionalDataDictionary.get().getValue();
         }
+        try {
+            return objectMapper.readValue(optionalDataDictionary.get().getValue(), clazz);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            log.error("json parse error", e);
+        }
+
+        return null;
     }
 
     @Override
@@ -73,47 +101,18 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
     }
 
     @Override
-    public void delete(DataDictionary dictionary) {
-        dictionary.setDeletedAt(LocalDateTime.now());
-        this.dataDictionaryRepository.save(dictionary);
+    public void delete(DataDictionary dataDictionary) {
+        redissonClient.getBucket(this.getRedisCacheKey(dataDictionary.getKey())).delete();
+        dataDictionary.setDeletedAt(LocalDateTime.now());
+        this.dataDictionaryRepository.save(dataDictionary);
     }
 
     @Override
-    public DataDictionary modify(DataDictionary dictionary) {
-        return this.dataDictionaryRepository.save(dictionary);
+    public DataDictionary modify(DataDictionary dataDictionary) {
+        redissonClient.getBucket(this.getRedisCacheKey(dataDictionary.getKey())).delete();
+        return this.dataDictionaryRepository.save(dataDictionary);
     }
 
-    @Override
-    public <T> T getObjectValue(String key, Class<T> clazz) {
-        Optional<DataDictionary> optionalDataDictionary = this.dataDictionaryRepository.findFirstByKey(key);
-        if (optionalDataDictionary.isEmpty()) {
-            return null;
-        }
-        try {
-            return objectMapper.readValue(optionalDataDictionary.get().getValue(), clazz);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            log.error("json parse error", e);
-        }
-
-        return null;
-    }
-
-    @Override
-    public Optional<DataDictionary> get(String key) {
-        Optional<DataDictionary> optionalDataDictionary = Optional.empty();
-        RBucket<DataDictionary> rBucket = redissonClient.getBucket(this.getRedisCacheKey(key));
-        if (rBucket.isExists()) {
-            optionalDataDictionary = Optional.of(rBucket.get());
-        } else {
-            Optional<DataDictionary> row = this.dataDictionaryRepository.findFirstByKey(key);
-            if (row.isPresent()) {
-                rBucket.set(row.get(), 5, TimeUnit.MINUTES);
-                optionalDataDictionary = row;
-            }
-        }
-        return optionalDataDictionary;
-    }
 
     private String getRedisLockKey(String key) {
         return "data_dictionary:lock:key:" + key;
