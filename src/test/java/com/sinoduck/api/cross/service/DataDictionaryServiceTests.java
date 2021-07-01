@@ -2,6 +2,7 @@ package com.sinoduck.api.cross.service;
 
 import cn.hutool.core.lang.Assert;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sinoduck.api.cross.exception.DataDictionaryKeyExistsException;
 import com.sinoduck.api.db.entity.DataDictionary;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ public class DataDictionaryServiceTests {
     private DataDictionaryService dataDictionaryService;
 
     @Test
-    public void testAdd() {
+    public void testAdd() throws DataDictionaryKeyExistsException {
         DataDictionary dataDictionary = new DataDictionary();
         dataDictionary.setName("name");
         dataDictionary.setKey("key");

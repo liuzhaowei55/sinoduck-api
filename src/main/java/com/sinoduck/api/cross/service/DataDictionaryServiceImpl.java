@@ -2,6 +2,7 @@ package com.sinoduck.api.cross.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sinoduck.api.cross.exception.DataDictionaryKeyExistsException;
 import com.sinoduck.api.db.entity.DataDictionary;
 import com.sinoduck.api.db.repository.DataDictionaryRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -82,13 +83,13 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
     }
 
     @Override
-    public DataDictionary add(DataDictionary dataDictionary) {
+    public DataDictionary add(DataDictionary dataDictionary) throws DataDictionaryKeyExistsException {
         RLock rLock = redissonClient.getLock(this.getRedisLockKey(dataDictionary.getKey()));
         try {
             if (rLock.tryLock(LOCK_WAIT_SECONDS, LOCK_SECONDS, TimeUnit.SECONDS)) {
                 Boolean isExists = this.dataDictionaryRepository.existsByKey(dataDictionary.getKey());
                 if (isExists) {
-                    return null;
+                    throw new DataDictionaryKeyExistsException(dataDictionary);
                 }
                 return this.dataDictionaryRepository.save(dataDictionary);
             }

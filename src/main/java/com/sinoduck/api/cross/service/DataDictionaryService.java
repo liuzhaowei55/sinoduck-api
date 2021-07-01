@@ -1,5 +1,6 @@
 package com.sinoduck.api.cross.service;
 
+import com.sinoduck.api.cross.exception.DataDictionaryKeyExistsException;
 import com.sinoduck.api.db.entity.DataDictionary;
 
 import java.util.Optional;
@@ -48,8 +49,9 @@ public interface DataDictionaryService {
      *
      * @param dataDictionary 记录
      * @return 记录
+     * @throws DataDictionaryKeyExistsException key 存在时抛出
      */
-    DataDictionary add(DataDictionary dataDictionary);
+    DataDictionary add(DataDictionary dataDictionary) throws DataDictionaryKeyExistsException;
 
     /**
      * 删除记录
