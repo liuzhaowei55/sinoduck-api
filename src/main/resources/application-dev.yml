@@ -17,4 +17,5 @@ logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.type.descriptor.sql.BasicBinder: trace
+    com.baeldung.cloud.openfeign.client: FULL
 debug: true
