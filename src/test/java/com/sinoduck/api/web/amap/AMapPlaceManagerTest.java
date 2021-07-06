@@ -1,6 +1,6 @@
 package com.sinoduck.api.web.amap;
 
-import com.sinoduck.api.cross.manager.AMapManager;
+import com.sinoduck.api.manager.AMapManager;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

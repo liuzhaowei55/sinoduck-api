@@ -1,6 +1,6 @@
-package com.sinoduck.api.cross.exception;
+package com.sinoduck.api.module.dict.exception;
 
-import com.sinoduck.api.db.entity.DataDictionary;
+import com.sinoduck.api.module.dict.db.entity.DataDictionary;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 

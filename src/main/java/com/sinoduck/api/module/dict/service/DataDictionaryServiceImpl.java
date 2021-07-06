@@ -1,10 +1,10 @@
-package com.sinoduck.api.cross.service;
+package com.sinoduck.api.module.dict.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sinoduck.api.cross.exception.DataDictionaryKeyExistsException;
-import com.sinoduck.api.db.entity.DataDictionary;
-import com.sinoduck.api.db.repository.DataDictionaryRepository;
+import com.sinoduck.api.module.dict.exception.DataDictionaryKeyExistsException;
+import com.sinoduck.api.module.dict.db.entity.DataDictionary;
+import com.sinoduck.api.module.dict.db.repository.DataDictionaryRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBucket;
 import org.redisson.api.RLock;

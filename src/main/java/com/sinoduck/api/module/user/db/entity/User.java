@@ -1,4 +1,4 @@
-package com.sinoduck.api.db.entity;
+package com.sinoduck.api.module.user.db.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

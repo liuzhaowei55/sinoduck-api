@@ -1,4 +1,4 @@
-package com.sinoduck.api.db.entity;
+package com.sinoduck.api.module.user.db.entity;
 
 import cn.hutool.crypto.digest.BCrypt;
 import com.fasterxml.jackson.annotation.JsonIgnore;

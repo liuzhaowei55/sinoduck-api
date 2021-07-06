@@ -1,4 +1,4 @@
-package com.sinoduck.api.cross.manager;
+package com.sinoduck.api.manager;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;

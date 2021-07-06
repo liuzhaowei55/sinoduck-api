@@ -1,6 +1,6 @@
-package com.sinoduck.api.db.repository;
+package com.sinoduck.api.module.user.db.repository;
 
-import com.sinoduck.api.db.entity.UserPassword;
+import com.sinoduck.api.module.user.db.entity.UserPassword;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

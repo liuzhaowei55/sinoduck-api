@@ -1,7 +1,7 @@
 package com.sinoduck.api.web.portal.logic;
 
 import com.sinoduck.api.db.entity.Folder;
-import com.sinoduck.api.db.entity.User;
+import com.sinoduck.api.module.user.db.entity.User;
 import com.sinoduck.api.db.repository.FolderRepository;
 import com.sinoduck.api.web.exception.CustomErrorEnum;
 import com.sinoduck.api.web.exception.ErrorResponseException;

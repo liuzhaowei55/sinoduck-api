@@ -1,4 +1,4 @@
-package com.sinoduck.api.db.entity;
+package com.sinoduck.api.module.dict.db.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -12,26 +12,28 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
- * 登录凭证
- *
  * @author where.liu
  */
 @Data
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "user_token")
+@Table(name = "data_dictionary")
 @EntityListeners(AuditingEntityListener.class)
-public class UserToken {
+public class DataDictionary {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private Long userId;
-    private Long userPasswordId;
-    private String accessToken;
-    private String ua;
-    private String ip;
+    private String name;
+    @Column(name = "`key`")
+    private String key;
+    private String value;
+    /**
+     * @see TypeEnum
+     */
+    @Enumerated(EnumType.STRING)
+    private TypeEnum type;
+    private String memo;
 
     @Version
     private Integer version;
@@ -48,4 +50,19 @@ public class UserToken {
     @CreatedDate
     @Column(nullable = false)
     private LocalDateTime createdAt;
+
+    public enum TypeEnum {
+        /**
+         * 值类型：字符串
+         */
+        STRING,
+        /**
+         * 值类型：数字
+         */
+        NUMERIC,
+        /**
+         * 值类型：JSON 字符串
+         */
+        JSON;
+    }
 }

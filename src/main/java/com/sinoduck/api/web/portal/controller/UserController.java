@@ -2,7 +2,7 @@ package com.sinoduck.api.web.portal.controller;
 
 import com.sinoduck.api.web.exception.ErrorResponseException;
 import com.sinoduck.api.web.exception.InputException;
-import com.sinoduck.api.db.entity.User;
+import com.sinoduck.api.module.user.db.entity.User;
 import com.sinoduck.api.web.dto.ResponseDTO;
 import com.sinoduck.api.web.portal.logic.UserLogic;
 import com.sinoduck.api.web.portal.pojo.converter.UserConverter;

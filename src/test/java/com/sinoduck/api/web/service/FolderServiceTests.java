@@ -2,7 +2,7 @@ package com.sinoduck.api.web.service;
 
 import com.sinoduck.api.web.exception.ErrorResponseException;
 import com.sinoduck.api.db.entity.Folder;
-import com.sinoduck.api.db.entity.User;
+import com.sinoduck.api.module.user.db.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,9 +1,9 @@
-package com.sinoduck.api.web.service;
+package com.sinoduck.api.module.user.service;
 
 import cn.hutool.crypto.digest.BCrypt;
-import com.sinoduck.api.db.entity.User;
-import com.sinoduck.api.db.entity.UserPassword;
-import com.sinoduck.api.db.repository.UserPasswordRepository;
+import com.sinoduck.api.module.user.db.entity.User;
+import com.sinoduck.api.module.user.db.entity.UserPassword;
+import com.sinoduck.api.module.user.db.repository.UserPasswordRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

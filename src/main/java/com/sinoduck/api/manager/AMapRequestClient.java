@@ -1,4 +1,4 @@
-package com.sinoduck.api.cross.manager;
+package com.sinoduck.api.manager;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;

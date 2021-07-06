@@ -1,7 +1,7 @@
-package com.sinoduck.api.cross.service;
+package com.sinoduck.api.module.dict.service;
 
-import com.sinoduck.api.cross.exception.DataDictionaryKeyExistsException;
-import com.sinoduck.api.db.entity.DataDictionary;
+import com.sinoduck.api.module.dict.exception.DataDictionaryKeyExistsException;
+import com.sinoduck.api.module.dict.db.entity.DataDictionary;
 
 import java.util.Optional;
 

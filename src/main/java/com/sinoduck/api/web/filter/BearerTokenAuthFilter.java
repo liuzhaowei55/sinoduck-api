@@ -1,9 +1,9 @@
 package com.sinoduck.api.web.filter;
 
-import com.sinoduck.api.db.entity.User;
-import com.sinoduck.api.db.entity.UserToken;
-import com.sinoduck.api.db.repository.UserRepository;
-import com.sinoduck.api.db.repository.UserTokenRepository;
+import com.sinoduck.api.module.user.db.entity.User;
+import com.sinoduck.api.module.user.db.entity.UserToken;
+import com.sinoduck.api.module.user.db.repository.UserRepository;
+import com.sinoduck.api.module.user.db.repository.UserTokenRepository;
 import com.sinoduck.api.web.util.ThreadGlobalInfoContextHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

@@ -1,6 +1,6 @@
-package com.sinoduck.api.db.repository;
+package com.sinoduck.api.module.dict.db.repository;
 
-import com.sinoduck.api.db.entity.DataDictionary;
+import com.sinoduck.api.module.dict.db.entity.DataDictionary;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

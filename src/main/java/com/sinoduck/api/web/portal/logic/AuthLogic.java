@@ -1,15 +1,15 @@
 package com.sinoduck.api.web.portal.logic;
 
-import com.sinoduck.api.db.entity.User;
-import com.sinoduck.api.db.entity.UserToken;
-import com.sinoduck.api.db.repository.UserRepository;
-import com.sinoduck.api.db.repository.UserTokenRepository;
+import com.sinoduck.api.module.user.db.entity.User;
+import com.sinoduck.api.module.user.db.entity.UserToken;
+import com.sinoduck.api.module.user.db.repository.UserRepository;
+import com.sinoduck.api.module.user.db.repository.UserTokenRepository;
 import com.sinoduck.api.web.exception.CustomErrorEnum;
 import com.sinoduck.api.web.exception.ErrorResponseException;
 import com.sinoduck.api.web.exception.InputException;
 import com.sinoduck.api.web.portal.pojo.query.CreateUserQuery;
-import com.sinoduck.api.web.service.UserPasswordService;
-import com.sinoduck.api.web.service.UserService;
+import com.sinoduck.api.module.user.service.UserPasswordService;
+import com.sinoduck.api.module.user.service.UserService;
 import com.sinoduck.api.web.util.ThreadGlobalInfoContextHolder;
 import org.springframework.stereotype.Service;
 
